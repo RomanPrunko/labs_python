@@ -9,7 +9,7 @@ cookies = http.cookies.SimpleCookie()
 print("Set-Cookie: form_count=; expires=Thu, 01 Jan 1970 00:00:00 GMT")
 print("Content-type: text/html\n")
 
-# HTML-код відповіді
+
 print("<html>")
 print("<head>")
 print("<title>Видалення cookies</title>")

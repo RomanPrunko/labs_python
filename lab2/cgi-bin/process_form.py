@@ -17,7 +17,7 @@ num_forms_filled = int(cookie.get("num_forms_filled", "0").value if cookie.get("
 # Виведення заголовку контенту
 print("Content-type: text/html\n")
 
-# HTML-код відповіді
+
 print("<html>")
 print("<head>")
 print("<title>Результат обробки форми</title>")
@@ -26,7 +26,7 @@ print("<body>")
 
 # Обробка натискання кнопки "Видалити Cookies"
 if "delete_cookies" in form:
-    # Видалення cookies тільки якщо кнопка була натиснута
+
     cookie["num_forms_filled"] = ""
     cookie["num_forms_filled"]["expires"] = 0
     print("<p>Всі cookies видалено.</p>")
