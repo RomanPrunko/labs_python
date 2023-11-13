@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Info</title>
+</head>
+<body>
+    <h2>Привіт! {{ username }}!</h2>
+
+    <form method="get" action="{{ url_for('logout') }}">
+        <input type="submit" value="Вийти">
+    </form>
+</body>
+</html>
