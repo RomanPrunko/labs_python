@@ -24,7 +24,7 @@
             <th>Value</th>
             <th>Creation Time</th>
             <th>Expiry Time</th>
-            <th>Actions</th> <!-- Додано колонку для дій -->
+            <th>Actions</th>
         </tr>
         {% for cookie in cookies_data %}
             <tr>
@@ -32,7 +32,7 @@
                 <td>{{ cookie.value }}</td>
                 <td>{{ cookie.creation_time }}</td>
                 <td>{{ cookie.expiry_time }}</td>
-                <!-- Додано кнопку для видалення кукі за ключем -->
+
                 <td>
                     <form method="get" action="{{ url_for('info') }}">
                         <input type="hidden" name="delete_key" value="{{ cookie.key }}">
