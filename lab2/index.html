@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,3 +46,47 @@
     </form>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Футбол</title>
+</head>
+<body>
+    <form action="cgi-bin/process_form.py" method="post">
+        <label for="team">Оберіть вашу улюблену футбольну команду:</label>
+        <select name="team" id="team">
+            <option value="barcelona">Барселона</option>
+            <option value="real_madrid">Реал Мадрид</option>
+            <option value="manchester_united">Манчестер Юнайтед</option>
+        </select>
+
+        <br>
+
+        <label for="position">Виберіть вашу улюблену позицію на полі:</label>
+        <input type="radio" name="position" value="forward"> Нападник
+        <input type="radio" name="position" value="midfielder"> Півзахисник
+        <input type="radio" name="position" value="defender"> Захисник
+
+        <br>
+
+        <label for="favorite_player">Ваш улюблений гравець:</label>
+        <input type="text" name="favorite_player" id="favorite_player">
+
+        <br>
+
+        <label for="subscribe">Підписатися на новини:</label>
+        <select name="subscribe" id="subscribe">
+            <option value="yes">Так</option>
+            <option value="no">Ні</option>
+        </select>
+
+        <br>
+
+        <input type="submit" value="Надіслати">
+    </form>
+</body>
+</html>
+>>>>>>> f16010139cf65b13a8268bfe50c97e6438ab20af
