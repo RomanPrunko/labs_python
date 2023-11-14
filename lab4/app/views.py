@@ -90,3 +90,25 @@ def logout():
     # Видалення інформації про користувача з сесії
     session.pop("username", None)
     return redirect(url_for("login"))
+
+
+# Нова функція для зміни пароля користувача
+@app.route("/change_password", methods=["POST"])
+def change_password():
+    if "username" in session:
+        username = session["username"]
+        new_password = request.form.get("new_password")
+
+        # Змінюємо пароль користувача в базі даних (в даному випадку - у файлі users.json)
+        for user in users:
+            if user["username"] == username:
+                user["password"] = new_password
+                break
+
+        # Зберігаємо зміни у файлі users.json
+        with open("users.json", "w") as file:
+            json.dump({"users": users}, file, indent=2)
+
+        return jsonify({"message": "Пароль успішно змінено"})
+    else:
+        return jsonify({"error": "Користувач не автентифікований"})

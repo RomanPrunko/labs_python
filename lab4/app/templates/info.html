@@ -21,7 +21,7 @@
     <table border="1">
         <tr>
             <th>Key</th>
-            <th>Value</th>
+            >            <th>Value</th>
             <th>Creation Time</th>
             <th>Expiry Time</th>
             <th>Actions</th>
@@ -43,6 +43,12 @@
         {% endfor %}
     </table>
 
+    <h3>Change Password</h3>
+    <form method="post" action="{{ url_for('change_password') }}">
+        <label for="new_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required><br>
+        <input type="submit" value="Change Password">
+    </form>
 
     <form method="get" action="{{ url_for('logout') }}">
         <input type="submit" value="Вийти">
