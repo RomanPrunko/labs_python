@@ -30,6 +30,16 @@
                     </tbody>
                 </table>
             {% endif %}
+            <form method="post" action="{{ url_for('change_password') }}" class="text-center mt-4">
+    <h3 class="text-center mt-4">Змінити пароль:</h3>
+    <div class="mb-3">
+        <label for="new_password" class="form-label">Новий пароль:</label>
+        <input type="password" class="form-control" id="new_password" name="new_password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Змінити пароль</button>
+</form>
+
+
 
             <form method="post" action="{{ url_for('add_cookie') }}">
                 <h3 class="text-center mt-4">Додати кукі:</h3>
@@ -72,5 +82,8 @@
             <p class="text-center">Будь ласка, увійдіть в систему.</p>
             <a href="{{ url_for('login') }}" class="btn btn-primary d-block mx-auto mt-3">Увійти</a>
         {% endif %}
+
+
+
     </div>
 {% endblock %}

@@ -161,3 +161,30 @@ def about():
 @app.route('/main')
 def main():
     return redirect(url_for("home"))
+
+# ...
+
+@app.route('/change_password', methods=['POST'])
+def change_password():
+    if 'username' in session:
+        username = session['username']
+        new_password = request.form.get('new_password')
+
+        # Змініть пароль користувача у файлі users.json
+        with open(auth_data_path, 'r') as f:
+            auth_data = json.load(f)
+
+        for user in auth_data['users']:
+            if user['username'] == username:
+                user['password'] = new_password
+
+        with open(auth_data_path, 'w') as f:
+            json.dump(auth_data, f, indent=2)
+
+        return redirect(url_for('info'))
+
+    # Якщо користувач не автентифікований, перенаправте його на сторінку входу
+    return redirect(url_for('login'))
+
+
+
