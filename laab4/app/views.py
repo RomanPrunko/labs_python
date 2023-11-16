@@ -1,7 +1,6 @@
 from flask import request, render_template, redirect, url_for, make_response, session
 from app import app
 import json
-from data import posts
 from datetime import datetime
 from os.path import join, dirname, abspath
 import os
@@ -9,6 +8,58 @@ import os
 auth_data_path = join(dirname(abspath(__file__)), 'users.json')
 with open(auth_data_path, 'r') as f:
     auth_data = json.load(f)
+
+@app.route('/add_cookie', methods=['POST'])
+def add_cookie():
+    key = request.form.get('key')
+    value = request.form.get('value')
+    expiry = int(request.form.get('expiry'))
+
+    if 'cookies' not in session:
+        session['cookies'] = {}
+
+    session['cookies'][key] = {
+        'value': value,
+        'expires': expiry,
+        'created': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+
+    response = make_response(redirect(url_for('info')))
+    response.set_cookie(key, value, max_age=expiry)
+
+    return response
+
+
+
+@app.route('/remove_cookie', methods=['POST'])
+def remove_cookie():
+    key_to_remove = request.form.get('key_to_remove')
+
+    if key_to_remove in request.cookies:
+        response = make_response(redirect(url_for('info')))
+        response.delete_cookie(key_to_remove)
+
+        cookies = session.get('cookies', {})
+        cookies.pop(key_to_remove, None)
+        session['cookies'] = cookies
+
+        return response
+    else:
+        return "Cookie not found", 404
+
+@app.route('/remove_all_cookies', methods=['POST'])
+def remove_all_cookies():
+    response = make_response(redirect(url_for('info')))
+
+    for key in request.cookies.keys():
+        response.delete_cookie(key)
+
+    session.pop('cookies', None)
+
+    return response
+
+
+
 
 @app.route('/')
 def index():
@@ -42,7 +93,6 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-
 @app.route('/info')
 def info():
     # Перевіряємо, чи користувач вже автентифікований
@@ -55,6 +105,22 @@ def info():
     else:
         # Якщо користувач не автентифікований, перенаправляємо його на сторінку входу
         return redirect(url_for('login'))
+
+@app.route('/delete_cookie/<key>')
+def delete_cookie(key):
+    response = make_response(redirect(url_for('info')))
+    cookies = session.get('cookies', [])
+    session['cookies'] = [cookie for cookie in cookies if cookie['key'] != key]
+    response.delete_cookie(key)
+    return response
+
+@app.route('/delete_all_cookies', methods=['POST'])
+def delete_all_cookies():
+    response = make_response(redirect(url_for('info')))
+    for cookie in session.get('cookies', []):
+        response.delete_cookie(cookie['key'])
+    session.pop('cookies', None)
+    return response
 
 
 @app.route('/page1')
