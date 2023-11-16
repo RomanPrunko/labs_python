@@ -162,7 +162,7 @@ def about():
 def main():
     return redirect(url_for("home"))
 
-# ...
+
 
 @app.route('/change_password', methods=['POST'])
 def change_password():
@@ -170,7 +170,7 @@ def change_password():
         username = session['username']
         new_password = request.form.get('new_password')
 
-        # Змініть пароль користувача у файлі users.json
+
         with open(auth_data_path, 'r') as f:
             auth_data = json.load(f)
 
@@ -183,7 +183,7 @@ def change_password():
 
         return redirect(url_for('info'))
 
-    # Якщо користувач не автентифікований, перенаправте його на сторінку входу
+
     return redirect(url_for('login'))
 
 
