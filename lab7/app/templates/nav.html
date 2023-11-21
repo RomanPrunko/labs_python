@@ -1,0 +1,19 @@
+{% set menu = {"Домашня": url_for("home"), "Про мене": url_for("about"),"Реєстрація": url_for("register"),"Логін": url_for("login"),"Todo": url_for("todos"),"feedback": url_for("feedback"),"all users": url_for("users") }  %}
+
+<nav class="navbar navbar-expand-lg navbar-light centered-navbar" style="background-color: #9370DB;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Prunko</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                {% for name, url in menu.items() %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url }}">{{ name | upper }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
