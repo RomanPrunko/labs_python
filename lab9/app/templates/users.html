@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5">All Users</h1>
+
+        {% if all_users %}
+            <ul class="list-group mt-3">
+                {% for user in all_users %}
+                    <li class="list-group-item">{{ user.username }}</li>
+                {% endfor %}
+            </ul>
+            <p class="mt-3">Total users: {{ all_users|length }}</p>
+        {% else %}
+            <p class="mt-3">No users registered yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
